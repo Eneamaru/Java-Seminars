@@ -2,7 +2,8 @@ package Homework_1;
 
 import java.util.Scanner;
 
-public class task_3 {
+// Реализовать простой калькулятор (+-/*)
+public class Task3 {
     public static void main(String args[]) {
         double operand1, operand2, result;
         char operator;
