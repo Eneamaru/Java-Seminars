@@ -11,11 +11,11 @@ public class Main {
     public static void main(String[] args) {
         Set<Notebook> Notebooks = new HashSet<>();
 
-        Notebook Notebook1 = new Notebook(8, 512, "Windows", "серый");
-        Notebook Notebook2 = new Notebook(16, 1024, "macOS", "белый");
-        Notebook Notebook3 = new Notebook(8, 256, "Windows", "черный");
-        Notebook Notebook4 = new Notebook(16, 512, "macOS", "серый");
-        Notebook Notebook5 = new Notebook(8, 512, "Linux", "черный");
+        Notebook Notebook1 = new Notebook(8, 512, "Windows", "black");
+        Notebook Notebook2 = new Notebook(16, 1024, "macOS", "white");
+        Notebook Notebook3 = new Notebook(8, 256, "Windows", "grey");
+        Notebook Notebook4 = new Notebook(16, 512, "macOS", "grey");
+        Notebook Notebook5 = new Notebook(8, 512, "Linux", "black");
 
         Notebooks.add(Notebook1);
         Notebooks.add(Notebook2);
@@ -28,10 +28,11 @@ public class Main {
         boolean flag = false;
         HashMap<String, Object> filters = new HashMap<>();
         HashSet<Notebook> result = new HashSet<>();
-        
-        while (!flag){
 
-            System.out.println("Выберите характеристики: \n1. Оперативная память\n2. Жёсткий диск\n3. Операционная система\n4. Цвет\n0. Поиск");
+        while (!flag) {
+
+            System.out.println(
+                    "Выберите характеристики: \n1. Оперативная память\n2. Жёсткий диск\n3. Операционная система\n4. Цвет\n0. Поиск");
             String n = scanner.next();
 
             switch (n) {
@@ -46,12 +47,12 @@ public class Main {
                     filters.put("HD", userHD);
                 }
                 case ("3"): {
-                    System.out.print("Введите ОС(Windows, MacOS, Linux): ");
+                    System.out.print("Выберите ОС(Windows, MacOS, Linux): ");
                     String userOS = scanner.next();
                     filters.put("OS", userOS);
                 }
                 case ("4"): {
-                    System.out.print("Выберите цвет: 'белый', 'серый', 'черный' ");
+                    System.out.print("Выберите цвет: 'white', 'grey', 'black' ");
                     String userColor = scanner.next();
                     filters.put("color", userColor);
                 }
@@ -85,7 +86,9 @@ public class Main {
                             Iterator<Notebook> it = Notebooks.iterator();
                             while (it.hasNext()) {
                                 Notebook nb = (Notebook) it.next();
-                                if (nb.getOS().equals (el.getValue())); {
+                                if (nb.getOS().equals(el.getValue()))
+                                    ;
+                                {
                                     result.add(nb);
                                 }
                             }
@@ -106,10 +109,10 @@ public class Main {
                     while (it.hasNext()) {
                         Notebook nb = (Notebook) it.next();
                         System.out.println("\n Найдено: " + nb.toString());
-                        System.out.println();
                     }
                 }
-                default: throw new IllegalStateException("Неожидаемое значение: " + n);
+                default:
+                    throw new IllegalStateException("Неожидаемое значение: " + n);
             }
         }
     }
