@@ -52,34 +52,28 @@ public class Main {
                 case "0": {
                     flag = true;
                     System.out.println("\nПо запросу: " + filters);
-                    for (Map.Entry<String, Object> el : filters.entrySet()) {
-                        if (el.getKey().equals("RAM")) {
-                            for (Notebook nb : notebooks) {
-                                if (nb.getRAM() >= (Integer) el.getValue()) {
-                                    result.add(nb);
-                                }
+                    for (Notebook nb : notebooks) {
+                        boolean match = true;
+                        for (Map.Entry<String, Object> el : filters.entrySet()) {
+                            if (el.getKey().equals("RAM") && nb.getRAM() < (Integer) el.getValue()) {
+                                match = false;
+                                break;
+                            }
+                            if (el.getKey().equals("HD") && nb.getHD() < (Integer) el.getValue()) {
+                                match = false;
+                                break;
+                            }
+                            if (el.getKey().equals("OS") && !nb.getOS().equals(el.getValue())) {
+                                match = false;
+                                break;
+                            }
+                            if (el.getKey().equals("color") && !nb.getColor().equals(el.getValue())) {
+                                match = false;
+                                break;
                             }
                         }
-                        if (el.getKey().equals("HD")) {
-                            for (Notebook nb : notebooks) {
-                                if (nb.getHD() >= (Integer) el.getValue()) {
-                                    result.add(nb);
-                                }
-                            }
-                        }
-                        if (el.getKey().equals("OS")) {
-                            for (Notebook nb : notebooks) {
-                                if (nb.getOS().equals(el.getValue())) {
-                                    result.add(nb);
-                                }
-                            }
-                        }
-                        if (el.getKey().equals("color")) {
-                            for (Notebook nb : notebooks) {
-                                if (nb.getColor().equals(el.getValue())) {
-                                    result.add(nb);
-                                }
-                            }
+                        if (match) {
+                            result.add(nb);
                         }
                     }
                     for (Notebook nb : result) {
