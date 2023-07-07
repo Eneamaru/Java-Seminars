@@ -57,13 +57,11 @@ public class Notebook {
     }
 
     private String getInfo() {
-        return String.format("\n" + name + "\n" + "Операционная система: " + OS + " \nОперативная память: " + RAM
-                + "Гб \nЖёсткий диск: " + HD + "Гб" + "\nЦвет: " + color);
+        return String.format("\nБренд: %s\nОперационная система: %s\nОперативная память: %d Гб\nЖёсткий диск: %d Гб\nЦвет: %s", name, OS, RAM, HD, color);
     }
 
     @Override
     public String toString() {
-
         return getInfo();
     }
 }
