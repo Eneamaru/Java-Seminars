@@ -11,11 +11,11 @@ public class Main {
     public static void main(String[] args) {
         Set<Notebook> Notebooks = new HashSet<>();
 
-        Notebook Notebook1 = new Notebook(8, 512, "Windows", "black");
-        Notebook Notebook2 = new Notebook(16, 1024, "macOS", "white");
-        Notebook Notebook3 = new Notebook(8, 256, "Windows", "grey");
-        Notebook Notebook4 = new Notebook(16, 512, "macOS", "grey");
-        Notebook Notebook5 = new Notebook(8, 512, "Linux", "black");
+        Notebook Notebook1 = new Notebook("Asus", 8, 512, "Windows", "black");
+        Notebook Notebook2 = new Notebook("Apple", 16, 1024, "MacOS", "white");
+        Notebook Notebook3 = new Notebook("Dell", 8, 256, "Windows", "grey");
+        Notebook Notebook4 = new Notebook("Lenovo", 16, 512, "Linux", "grey");
+        Notebook Notebook5 = new Notebook("Razer", 8, 512, "Linux", "black");
 
         Notebooks.add(Notebook1);
         Notebooks.add(Notebook2);
@@ -28,7 +28,6 @@ public class Main {
         boolean flag = false;
         HashMap<String, Object> filters = new HashMap<>();
         HashSet<Notebook> result = new HashSet<>();
-
         while (!flag) {
 
             System.out.println(
@@ -40,23 +39,27 @@ public class Main {
                     System.out.print("Введите минимальную оперативную память: ");
                     Integer userRAM = scanner.nextInt();
                     filters.put("RAM", userRAM);
+                    break;
                 }
                 case ("2"): {
                     System.out.print("Введите минимальный объем ЖД: ");
                     Integer userHD = scanner.nextInt();
                     filters.put("HD", userHD);
+                    break;
                 }
                 case ("3"): {
                     System.out.print("Выберите ОС(Windows, MacOS, Linux): ");
                     String userOS = scanner.next();
                     filters.put("OS", userOS);
+                    break;
                 }
                 case ("4"): {
-                    System.out.print("Выберите цвет: 'white', 'grey', 'black' ");
+                    System.out.print("Выберите цвет('white', 'grey', 'black'): ");
                     String userColor = scanner.next();
                     filters.put("color", userColor);
+                    break;
                 }
-                case ("5"): {
+                case ("0"): {
                     flag = true;
                     System.out.println();
                     System.out.println("По запросу: " + filters);
@@ -71,7 +74,15 @@ public class Main {
                                 }
                             }
                         }
-
+                        if (el.getKey().equals("RAM")) {
+                            Iterator<Notebook> it = Notebooks.iterator();
+                            while (it.hasNext()) {
+                                Notebook nb = it.next();
+                                if (nb.getRAM() < (Integer) el.getValue()) {
+                                    result.remove(nb);
+                                }
+                            }
+                        }
                         if (el.getKey().equals("HD")) {
                             Iterator<Notebook> it = Notebooks.iterator();
                             while (it.hasNext()) {
@@ -81,19 +92,33 @@ public class Main {
                                 }
                             }
                         }
-
+                        if (el.getKey().equals("RAM")) {
+                            Iterator<Notebook> it = Notebooks.iterator();
+                            while (it.hasNext()) {
+                                Notebook nb = it.next();
+                                if (nb.getHD() < (Integer) el.getValue()) {
+                                    result.remove(nb);
+                                }
+                            }
+                        }
                         if (el.getKey().equals("OS")) {
                             Iterator<Notebook> it = Notebooks.iterator();
                             while (it.hasNext()) {
                                 Notebook nb = (Notebook) it.next();
-                                if (nb.getOS().equals(el.getValue()))
-                                    ;
-                                {
+                                if (nb.getOS().equals(el.getValue())){
                                     result.add(nb);
                                 }
                             }
                         }
-
+                        if (el.getKey().equals("OS")) {
+                            Iterator<Notebook> it = Notebooks.iterator();
+                            while (it.hasNext()) {
+                                Notebook nb = it.next();
+                                if (nb.getOS() != el.getValue()) {
+                                    result.remove(nb);
+                                }
+                            }
+                        }
                         if (el.getKey().equals("color")) {
                             Iterator<Notebook> it = Notebooks.iterator();
                             while (it.hasNext()) {
@@ -103,16 +128,25 @@ public class Main {
                                 }
                             }
                         }
+                        if (el.getKey().equals("color")) {
+                            Iterator<Notebook> it = Notebooks.iterator();
+                            while (it.hasNext()) {
+                                Notebook nb = it.next();
+                                if (nb.getColor() != el.getValue()) {
+                                    result.remove(nb);
+                                }
+                            }
+                        }
                     }
 
-                    Iterator it = result.iterator();
+                    Iterator<Notebook> it = result.iterator();
                     while (it.hasNext()) {
                         Notebook nb = (Notebook) it.next();
                         System.out.println("\n Найдено: " + nb.toString());
                     }
                 }
-                default:
-                    throw new IllegalStateException("Неожидаемое значение: " + n);
+                // default:
+                //     throw new IllegalStateException("Неожидаемое значение: " + n);
             }
         }
     }
