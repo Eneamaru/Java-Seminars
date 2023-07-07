@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Iterator;
 
-public class Main1 {
+public class Main {
     public static void main(String[] args) {
         Set<Notebook> Notebooks = new HashSet<>();
 
@@ -26,41 +26,39 @@ public class Main1 {
         System.out.println("Добро пожаловть в наш каталог!");
         Scanner scanner = new Scanner(System.in);
         boolean flag = false;
-        Integer n = scanner.nextInt();
-        scanner.nextLine();
         HashMap<String, Object> filters = new HashMap<>();
         HashSet<Notebook> result = new HashSet<>();
         
         while (!flag){
 
             System.out.println("Выберите характеристики: \n1. Оперативная память\n2. Жёсткий диск\n3. Операционная система\n4. Цвет\n0. Поиск");
-            String request = scanner.next();
+            String n = scanner.next();
 
             switch (n) {
-                case (1): {
+                case ("1"): {
                     System.out.print("Введите минимальную оперативную память: ");
                     Integer userRAM = scanner.nextInt();
-                    filters.put("ram", userRAM);
+                    filters.put("RAM", userRAM);
                 }
-                case (2): {
+                case ("2"): {
                     System.out.print("Введите минимальный объем ЖД: ");
                     Integer userHD = scanner.nextInt();
-                    filters.put("storage", userHD);
+                    filters.put("HD", userHD);
                 }
-                case (3): {
+                case ("3"): {
                     System.out.print("Введите ОС(Windows, MacOS, Linux): ");
                     String userOS = scanner.next();
                     filters.put("OS", userOS);
                 }
-                case (4): {
+                case ("4"): {
                     System.out.print("Выберите цвет: 'белый', 'серый', 'черный' ");
                     String userColor = scanner.next();
                     filters.put("color", userColor);
                 }
-                case (5): {
+                case ("5"): {
                     flag = true;
                     System.out.println();
-                    System.out.println("by request: " + filters);
+                    System.out.println("По запросу: " + filters);
 
                     for (Map.Entry<String, Object> el : filters.entrySet()) {
                         if (el.getKey().equals("RAM")) {
@@ -77,7 +75,7 @@ public class Main1 {
                             Iterator<Notebook> it = Notebooks.iterator();
                             while (it.hasNext()) {
                                 Notebook nb = (Notebook) it.next();
-                                if (nb.getStorage() >= (Integer) el.getValue()) {
+                                if (nb.getHD() >= (Integer) el.getValue()) {
                                     result.add(nb);
                                 }
                             }
