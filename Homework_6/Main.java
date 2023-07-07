@@ -105,7 +105,7 @@ public class Main {
                     Iterator it = result.iterator();
                     while (it.hasNext()) {
                         Notebook nb = (Notebook) it.next();
-                        System.out.println("\n Найдено -> " + nb.toString());
+                        System.out.println("\n Найдено: " + nb.toString());
                         System.out.println();
                     }
                 }

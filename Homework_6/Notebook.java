@@ -27,7 +27,7 @@ public class Notebook {
         return color;
     }
     private String getInfo(){
-        return String.format("\n"+" - OS: " +OS +" \n RAM: %d GB \n HD: %d GB \n color: " + color, RAM, HD);
+        return String.format("\n"+" - Операционная система: " + OS +" \n Оперативная память: %d Гб \n Жёсткий диск: %d Гб \n Цвет: " + RAM, HD, color);
     }
 @Override
     public String toString(){
